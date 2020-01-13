@@ -25,10 +25,10 @@ public class Holiday {
     private LocalDate endDate;
 
     @Column
-    private TYPE type;
+    private HOLIDAYTYPE type;
 
     @Column
-    private STATUS status;
+    private HOLIDAYSTATUS status;
 
     @Column
     @ManyToOne
@@ -38,13 +38,13 @@ public class Holiday {
     @ManyToOne
     private User user;
 
-    public static enum TYPE {
+    public static enum HOLIDAYTYPE {
         PTO,
         VTO,
         SICK
     }
 
-    public static enum STATUS {
+    public static enum HOLIDAYSTATUS {
         APPROVED,
         DECLINED,
         PENDING
