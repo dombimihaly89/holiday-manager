@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,12 +21,19 @@ public class User {
     private Long id;
 
     @Column
-    private String name;
+    private String userName;
 
     @Column
     private String password;
 
     @Column
     private String role;
+
+    @ManyToOne
+    @JoinColumn
+    private User boss;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private AvailableHolidays availableHolidays;
 
 }

@@ -1,5 +1,7 @@
 package hu.flowacademy.holidaymanager.models;
 
+import hu.flowacademy.holidaymanager.models.DTO.HolidayRequestDTO;
+import hu.flowacademy.holidaymanager.models.DTO.HolidayResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 public class Holiday {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -25,26 +27,35 @@ public class Holiday {
     private LocalDate endDate;
 
     @Column
-    private HOLIDAYTYPE type;
+    @Enumerated(EnumType.STRING)
+    private HolidayType type;
 
     @Column
-    private HOLIDAYSTATUS status;
+    @Enumerated(EnumType.STRING)
+    private HolidayStatus status = HolidayStatus.PENDING;
 
-    @Column
     @ManyToOne
     private User boss;
 
-    @Column
     @ManyToOne
     private User user;
 
-    public static enum HOLIDAYTYPE {
+    public void holidayFromDTO(HolidayRequestDTO holidayRequestDTO) {
+        if (holidayRequestDTO.getId() != null) {
+            this.setId(holidayRequestDTO.getId());
+        }
+        this.startDate = holidayRequestDTO.getStartDate();
+        this.endDate = holidayRequestDTO.getEndDate();
+        this.type = holidayRequestDTO.getType();
+    }
+
+    public static enum HolidayType {
         PTO,
         VTO,
         SICK
     }
 
-    public static enum HOLIDAYSTATUS {
+    public static enum HolidayStatus {
         APPROVED,
         DECLINED,
         PENDING

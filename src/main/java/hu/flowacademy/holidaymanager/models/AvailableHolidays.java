@@ -23,9 +23,9 @@ public class AvailableHolidays {
     @Column
     private int extra = 0;
 
-    @Column
     @OneToOne
     private User User;
+
 
 
 
