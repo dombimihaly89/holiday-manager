@@ -1,11 +1,10 @@
 package hu.flowacademy.holidaymanager.repository;
 
-import hu.flowacademy.holidaymanager.models.AvailableHolidays;
+import hu.flowacademy.holidaymanager.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AvailableHolidaysRepository extends JpaRepository<AvailableHolidays, Long> {
-
-
+public interface UserRepository extends JpaRepository<User, Long> {
+    
 }
