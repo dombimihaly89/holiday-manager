@@ -32,7 +32,7 @@ public class Holiday {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private HolidayStatus status = HolidayStatus.PENDING;
+    private HolidayStatus status;
 
     @ManyToOne
     private User boss;

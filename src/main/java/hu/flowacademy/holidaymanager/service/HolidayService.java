@@ -24,6 +24,12 @@ public class HolidayService {
     public Holiday addHoliday(HolidayRequestDTO holidayRequestDTO) {
         Holiday holiday = new Holiday();
         holiday.holidayFromDTO(holidayRequestDTO);
+        if (holidayRequestDTO.getId() != null) {
+            holiday.setStatus(holidayRepository.findById(holidayRequestDTO.getId()).orElse(null).getStatus());
+        }
+        if (holidayRequestDTO.getId() == null) {
+            holiday.setStatus(Holiday.HolidayStatus.PENDING);
+        }
         if (holiday.getStatus() != Holiday.HolidayStatus.PENDING) {
             throw new RuntimeException("Holiday cannot change, because it's status is " + holiday.getStatus());
         }
